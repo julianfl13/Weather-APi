@@ -11,14 +11,20 @@ var queryUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid
 $.ajax({
 
     url:queryUrl,
-
-    method:"GET"
+    dataType:"JSON",
+    method:"GET",
+    data:{
+        q:city,
+        units: "metric",
+        cnt: "10"
+    },
 
 }).then(function(response){
+    console.log('Received data:', data);
 
-console.log("Temperature " + response.list[0].main.temp);
-console.log("Humidity " + response.list[0].main.humidity + "%");
-console.log("Wind Speed " + response.list[0].wind.speed) + "mph";
+//console.log("Temperature " + response.list[0].main.temp);
+//console.log("Humidity " + response.list[0].main.humidity + "%");
+//console.log("Wind Speed " + response.list[0].wind.speed) + "mph";
 
 
 });
