@@ -20,32 +20,12 @@ function getWeatherApi(city){
         $("#humidity").text("Humidity: " + data.main.humidity + "%");
         $("#windSpeed").text("Wind Speed: " + data.wind.speed + " MPH");
         
+
+        getForecastApi(city);
+        getUVI(data.coord.lat, data.coord.lon);
       }
 });
 }
-// function getForecastApi(city) {
-
-//     $.ajax({
-//       type: "GET",
-//       url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=2739560a0ae503ea11be6b851a65ba4b&units=imperial",
-//       dataType: "json",
-//       success: function (data) {
-//               // console.log(data);
-//       var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
-//       $("#cityName").text(data.name + " " + new Date().toLocaleDateString()).append(img);
-//       $("#temp").text("Temperature: " + data.main.temp + " °F");
-//       $("#hum").text("Humidity: " + data.main.humidity + "%");
-//       $("#windSpeed").text("Wind Speed: " + data.wind.speed + " MPH");
-      
-
-
-
-//       getForecastApi(searchValue);
-//       getUVI(data.coord.lat, data.coord.lon)
-//     }
-//   });
-
-// }
 
 function getForecastApi(searchValue) {
 
@@ -66,7 +46,7 @@ function getForecastApi(searchValue) {
       $("#tempThree").text("Temp: "+data.list[15].main.temp+" °F")
       $("#tempFour").text("Temp: "+data.list[23].main.temp+" °F")
       $("#tempFive").text("Temp: "+data.list[31].main.temp+" °F")
-// humidity
+      // humidity
       $("#humOne").text("Humidity: "+data.list[0].main.humidity+" %")
       $("#humTwo").text("Humidity: "+data.list[7].main.humidity+" %")
       $("#humThree").text("Humidity: "+data.list[15].main.humidity+" %")
@@ -87,27 +67,4 @@ var img2=$("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[0
     }
   });
 
-    }
-
-    function getUVI(lat, lon) {
-      $.ajax({
-        type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/uvi?appid=2739560a0ae503ea11be6b851a65ba4b&lat=" + lat + "&lon=" + lon,
-        dataType: "json",
-        success: function (data) {
-          var btn = $("<span>").addClass("btn btn-sm").text(data.value);
-          if (data.value < 3) {
-            $("#uv").text("UV Index: ").append(btn.addClass("bg-success"));
-          } else if (data.value < 7) {
-            $("#uv").text("UV Index: ").append(btn.addClass("bg-warning"));
-          } else {
-            $("#uv").text("UV Index: ").append(btn.addClass("bg-danger"));
-          }
-    
-    
-    
-    
-      
-        }
-      });
     }
